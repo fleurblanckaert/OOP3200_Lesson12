@@ -34,16 +34,41 @@ public class Main extends Application {
         primaryStage.setMinHeight(200.0);
            */
 
-        //Step 1 - Create a control
+        //Step 1 - Create one or more control
         Label helloLabel = new Label("Hello World");
+        Label goodByeLabel = new Label("Good Bye!");
+        Button clickMeButton = new Button("Click me");
+
+        //Step 1.1 - Configure controls
+        Font font = Font.font("Consolas", FontWeight.BOLD, 20);
+        clickMeButton.setFont(font);
+
+        //Step 1.2 - Set the event for button control 
+        clickMeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("ClickMe Button Clicked!");
+
+                helloLabel.setText("Clicked!");
+            }
+        });
 
         //Step 2 - Create a container
-        HBox hbox = new HBox(helloLabel);
+        //HBox hbox = new HBox(helloLabel, clickMeButton);
+        //VBox vbox = new VBox(helloLabel, clickMeButton);
+        GridPane gridPane = new GridPane();
+
+        gridPane.add(helloLabel, 1, 0);
+        gridPane.add(goodByeLabel, 1, 1);
+        gridPane.add(clickMeButton, 2, 2);
 
 
-        //Scene scene = new Scene(primaryStage, WIDTH, HEIGHT);
+        //Step 3 - add layout container to scene
+        Scene scene = new Scene(gridPane, WIDTH, HEIGHT);
 
-        //primaryStage.setScene(new Scene(root, 300, 275));
+        //Step 4 - add scene to stage
+        primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
